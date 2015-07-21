@@ -8,6 +8,22 @@ $config = [
     'bootstrap' => ['log'],
     'language' => 'ru-RU',
     'components' => [
+        'urlManager' => [
+            'class' => 'yii\web\UrlManager',
+            'enablePrettyUrl' => true,
+            'enableStrictParsing' => true,
+            'showScriptName' => false,
+            'rules' => [
+                '/' => 'books/index',
+                '/books' => 'books/index',
+                '/books/<id:\d+>' => 'books/view',
+                '/books/create' => 'books/create',
+                '/books/update/<id:\d+>' => 'books/update',
+                '/books/delete/<id:\d+>' => 'books/delete',
+                '/login' => 'site/login',
+                '/logout' => 'site/logout'
+            ]
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'f_37uPg1tj_1OQmyo1R-7lFX3SaRka9W',
@@ -39,6 +55,12 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
+        'formatter' => [
+            'class' => 'yii\i18n\Formatter',
+            'dateFormat' => 'php:d.m.Y',
+            'datetimeFormat' => 'php:d.m.Y H:i:s',
+            'timeFormat' => 'php:H:i:s',
+        ]
     ],
     'params' => $params,
 ];

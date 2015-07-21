@@ -4,6 +4,8 @@ namespace app\models;
 
 use Yii;
 use yii\db\Expression;
+use yii\web\UploadedFile;
+use yii\imagine\Image;
 
 /**
  * This is the model class for table "books".
@@ -18,6 +20,8 @@ use yii\db\Expression;
  */
 class Books extends \yii\db\ActiveRecord
 {
+    public $imageFile;
+
     /**
      * @inheritdoc
      */
@@ -35,8 +39,11 @@ class Books extends \yii\db\ActiveRecord
             [['date', 'name', 'author_id'], 'required'],
             [['author_id'], 'integer'],
             [['date_create', 'date_update', 'date'], 'safe'],
+            //[['date_create', 'date_update'], 'date'],
+            //[['date'], 'date', 'format' => 'php:d.m.Y'],
             [['name'], 'string', 'max' => 255],
-            [['preview'], 'string', 'max' => 512]
+            [['preview'], 'string', 'max' => 512],
+            [['imageFile'], 'image', 'extensions' => 'png,jpg,gif,bmp', 'skipOnEmpty' => true]
         ];
     }
 
@@ -51,6 +58,7 @@ class Books extends \yii\db\ActiveRecord
             'date_create' => 'Дата добавления',
             'date_update' => 'Дата последнего изменения записи',
             'preview' => 'Превью',
+            'imageFile' => 'Картинка',
             'date' => 'Дата выхода книги',
             'author_id' => 'Автор',
         ];
@@ -58,32 +66,43 @@ class Books extends \yii\db\ActiveRecord
 
     public function beforeSave($insert)
     {
-        $r = parent::beforeSave($insert);
-        echo '===';
-        var_dump($r);
-        echo '===';
-
         if (parent::beforeSave($insert)) {
             if ($insert) {
                 $this->date_create = new Expression("NOW()");
-                $d = $this->date;
-                $this->date = new Expression("DATE_FORMAT($d, \"%D-%M-%Y %H:%i:%s\")");
-
-                //echo "DATE_FORMAT($d, \"%D %M %Y %H:%i:%s\")";
-                //die();
             }
 
+
+            $d = split("\.", $this->date);
+            $this->date = $d[2].'-'.$d[1].'-'.$d[0];
+
             $this->date_update = new Expression("NOW()");
+
+            $file = UploadedFile::getInstance($this, 'imageFile');
+            $dir = Yii::getAlias('@webroot/upload/images/');
+
+            if ($this->validate()) {
+                $path = $dir.md5($file->tempName).'.'.$file->getExtension();
+                $isSaved = $file->saveAs($path);
+
+                if (!$isSaved) {
+                    return false;
+                }
+
+                $thumbPath = str_replace('images', 'preview', $path);
+                $thumbWidth = Yii::$app->params['thumbWidth'];
+                $thumbHeight = Yii::$app->params['thumbHeight'];
+                $thumbQuality = Yii::$app->params['thumbQuality'];
+
+                Image::thumbnail($path , $thumbWidth, $thumbHeight)
+                    ->save($thumbPath, ['quality' => $thumbQuality]);
+                $this->preview = str_replace(Yii::getAlias('@webroot'), '', $thumbPath);
+            } else {
+                return false;
+            }
+
             return true;
         }
 
         return false;
-
-        /*
-        print('<pre>');
-        print_r($this);
-        print('</pre>');
-        die();
-        */
     }
 }

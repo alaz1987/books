@@ -4,6 +4,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use newerton\fancybox\FancyBox;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -59,6 +60,39 @@ AppAsset::register($this);
             <p class="pull-right"><?= Yii::powered() ?></p>
         </div>
     </footer>
+
+<?=FancyBox::widget([
+    'target' => 'a[rel=fancybox]',
+    'helpers' => true,
+    'mouse' => true,
+    'config' => [
+        'maxWidth' => '100%',
+        'maxHeight' => '100%',
+        'playSpeed' => 7000,
+        'padding' => 0,
+        'fitToView' => false,
+        'width' => '70%',
+        'height' => '70%',
+        'autoSize' => false,
+        'closeClick' => false,
+        'openEffect' => 'elastic',
+        'closeEffect' => 'elastic',
+        'prevEffect' => 'elastic',
+        'nextEffect' => 'elastic',
+        'closeBtn' => false,
+        'openOpacity' => true,
+        'helpers' => [
+            'title' => ['type' => 'float'],
+            'buttons' => [],
+            'thumbs' => ['width' => 50, 'height' => 50],
+            'overlay' => [
+                'css' => [
+                    'background' => 'rgba(0, 0, 0, 0.8)'
+                ]
+            ]
+        ],
+    ]
+]);?>
 
 <?php $this->endBody() ?>
 </body>

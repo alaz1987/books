@@ -2,12 +2,13 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\models\Authors;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Books */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Books', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Книги', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="books-view">
@@ -15,27 +16,57 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Вы уверены, что хотите удалить книгу?',
                 'method' => 'post',
             ],
         ]) ?>
     </p>
 
-    <?= DetailView::widget([
+
+
+    <?
+    $attributes = [
+        'name',
+        'date_create',
+        'date_update'
+    ];
+
+    if (!empty($model->preview)) {
+        $path = Yii::getAlias('@webroot'.$model->preview);
+        if (file_exists($path)) {
+            $size = getimagesize($path);
+
+            $attributes[] = [
+                'attribute' => 'preview',
+                'format' => 'raw',
+                'value' => Html::a(Html::img($model->preview, [
+                        'width' => $size[0],
+                        'height' => $size[1]
+                    ]),
+                    str_replace('preview', 'images', $model->preview),
+                    ['rel' => 'fancybox']
+                )
+            ];
+        }
+    }
+
+    $author = Authors::findOne($model->author_id);
+    $attributes = array_merge($attributes, [
+        'date',
+        [
+            'attribute' => 'author_id',
+            'format' => 'raw',
+            'value' => ($author->firstname.' '.$author->lastname)
+        ]
+    ]);
+
+    echo DetailView::widget([
         'model' => $model,
-        'attributes' => [
-            'id',
-            'name',
-            'date_create',
-            'date_update',
-            'preview',
-            'date',
-            'author_id',
-        ],
-    ]) ?>
+        'attributes' => $attributes
+    ]); ?>
 
 </div>

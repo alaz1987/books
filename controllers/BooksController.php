@@ -75,14 +75,7 @@ class BooksController extends Controller
     {
         $model = new Books();
 
-        $v = $model->load(Yii::$app->request->post());
-        $v2 = $model->save();
-
-        print_r($v);
-        var_dump($v2);
-        die();
-
-        if ($v && $v2) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [

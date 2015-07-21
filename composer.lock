@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6366549ce0b7e72687dcdae94348ea18",
+    "hash": "ef0273775231911f917a0d12dee415bd",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -56,6 +56,22 @@
             ]
         },
         {
+            "name": "bower-asset/fancybox",
+            "version": "v2.1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fancyapps/fancyBox.git",
+                "reference": "e2248f468dc4b45f5b1ef1776bde958b2b52775d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fancyapps/fancyBox/zipball/e2248f468dc4b45f5b1ef1776bde958b2b52775d",
+                "reference": "e2248f468dc4b45f5b1ef1776bde958b2b52775d",
+                "shasum": ""
+            },
+            "type": "bower-asset-library"
+        },
+        {
             "name": "bower-asset/jquery",
             "version": "2.1.4",
             "source": {
@@ -98,6 +114,37 @@
                 "jquery",
                 "library"
             ]
+        },
+        {
+            "name": "bower-asset/jquery-mousewheel",
+            "version": "3.1.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jquery/jquery-mousewheel.git",
+                "reference": "c61913ebf569c7a3f086b7fb40d941c282d1ce48"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jquery/jquery-mousewheel/zipball/c61913ebf569c7a3f086b7fb40d941c282d1ce48",
+                "reference": "c61913ebf569c7a3f086b7fb40d941c282d1ce48",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.2.2"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "./jquery.mousewheel.js",
+                "bower-asset-ignore": [
+                    "*.json",
+                    "*.markdown",
+                    "*.txt",
+                    ".*",
+                    "!LICENSE.txt",
+                    "Gruntfile.js",
+                    "test"
+                ]
+            }
         },
         {
             "name": "bower-asset/jquery.inputmask",
@@ -317,6 +364,58 @@
             "time": "2013-11-30 08:25:19"
         },
         {
+            "name": "imagine/imagine",
+            "version": "v0.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/avalanche123/Imagine.git",
+                "reference": "f64ec666baaa800edcbf237db41121a569230709"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/avalanche123/Imagine/zipball/f64ec666baaa800edcbf237db41121a569230709",
+                "reference": "f64ec666baaa800edcbf237db41121a569230709",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "sami/sami": "dev-master"
+            },
+            "suggest": {
+                "ext-gd": "to use the GD implementation",
+                "ext-gmagick": "to use the Gmagick implementation",
+                "ext-imagick": "to use the Imagick implementation"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Imagine": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bulat Shakirzyanov",
+                    "email": "mallluhuct@gmail.com",
+                    "homepage": "http://avalanche123.com"
+                }
+            ],
+            "description": "Image processing for PHP 5.3",
+            "homepage": "http://imagine.readthedocs.org/",
+            "keywords": [
+                "drawing",
+                "graphics",
+                "image manipulation",
+                "image processing"
+            ],
+            "time": "2013-07-10 17:25:36"
+        },
+        {
             "name": "kartik-v/yii2-krajee-base",
             "version": "v1.7.7",
             "source": {
@@ -368,12 +467,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-datepicker.git",
-                "reference": "5771894597265c4d5a9dd7ac058d045b7f1f786f"
+                "reference": "bf7018663b7ee03cd8d07e623055c9c07f1eb1bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-datepicker/zipball/5771894597265c4d5a9dd7ac058d045b7f1f786f",
-                "reference": "5771894597265c4d5a9dd7ac058d045b7f1f786f",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-datepicker/zipball/bf7018663b7ee03cd8d07e623055c9c07f1eb1bf",
+                "reference": "bf7018663b7ee03cd8d07e623055c9c07f1eb1bf",
                 "shasum": ""
             },
             "require": {
@@ -409,7 +508,52 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2015-06-26 20:36:39"
+            "time": "2015-07-10 04:22:25"
+        },
+        {
+            "name": "newerton/yii2-fancybox",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/newerton/yii2-fancybox.git",
+                "reference": "55105b97a1b3ab7ee6fa28e50b40cb328b8d31aa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/newerton/yii2-fancybox/zipball/55105b97a1b3ab7ee6fa28e50b40cb328b8d31aa",
+                "reference": "55105b97a1b3ab7ee6fa28e50b40cb328b8d31aa",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/fancybox": "@stable",
+                "bower-asset/jquery-mousewheel": "~3.1.3",
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "newerton\\fancybox\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Newerton Vargas de Araujo",
+                    "email": "newerton.araujo@gmail.com"
+                }
+            ],
+            "description": "fancyBox is a tool that offers a nice and elegant way to add zooming functionality for images, html content and multi-media on your webpages.",
+            "keywords": [
+                "extension",
+                "fancyapps",
+                "fancybox",
+                "yii2"
+            ],
+            "time": "2015-05-20 02:05:47"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -466,16 +610,16 @@
         },
         {
             "name": "yiisoft/yii2",
-            "version": "2.0.4",
+            "version": "2.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "726867caee3f23aa7a6975c801e64b6021e14f86"
+                "reference": "ea8c13b9f5cd437bd7bf73cad8a3457a155f3727"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/726867caee3f23aa7a6975c801e64b6021e14f86",
-                "reference": "726867caee3f23aa7a6975c801e64b6021e14f86",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/ea8c13b9f5cd437bd7bf73cad8a3457a155f3727",
+                "reference": "ea8c13b9f5cd437bd7bf73cad8a3457a155f3727",
                 "shasum": ""
             },
             "require": {
@@ -550,7 +694,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2015-05-10 20:09:47"
+            "time": "2015-07-11 02:37:59"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -645,6 +789,54 @@
             "keywords": [
                 "composer",
                 "extension installer",
+                "yii2"
+            ],
+            "time": "2015-03-01 06:22:44"
+        },
+        {
+            "name": "yiisoft/yii2-imagine",
+            "version": "2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-imagine.git",
+                "reference": "0961343138b65bba447de84b2b300899617e6acc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-imagine/zipball/0961343138b65bba447de84b2b300899617e6acc",
+                "reference": "0961343138b65bba447de84b2b300899617e6acc",
+                "shasum": ""
+            },
+            "require": {
+                "imagine/imagine": "0.5.*",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\imagine\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Antonio Ramirez",
+                    "email": "amigo.cobos@gmail.com"
+                }
+            ],
+            "description": "The Imagine integration for the Yii framework",
+            "keywords": [
+                "helper",
+                "image",
+                "imagine",
                 "yii2"
             ],
             "time": "2015-03-01 06:22:44"
@@ -1010,7 +1202,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "kartik-v/yii2-widget-datepicker": 20
+        "kartik-v/yii2-widget-datepicker": 20,
+        "newerton/yii2-fancybox": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

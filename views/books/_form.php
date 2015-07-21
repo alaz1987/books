@@ -12,16 +12,40 @@ use kartik\date\DatePicker;
 
 <div class="books-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <? $form = ActiveForm::begin([
+        'options' => ['enctype'=>'multipart/form-data']
+    ]); ?>
+
+    <?=$form->errorSummary($model)?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'preview')->textInput(['maxlength' => true]) ?>
+    <?
+        // preview image
+        echo $form->field($model, 'imageFile')->fileInput();
+
+        if (!empty($model->preview)) {
+            $path = Yii::getAlias('@webroot'.$model->preview);
+            if (file_exists($path)) {
+                $size = getimagesize($path);
+
+                echo Html::a(Html::img($model->preview, [
+                        'width' => $size[0],
+                        'height' => $size[1]
+                    ]),
+                    str_replace('preview', 'images', $model->preview),
+                    ['rel' => 'fancybox']
+                );
+                echo "<br><br>";
+            }
+        }
+    ?>
 
     <?= $form->field($model, 'date')->widget(DatePicker::className(), [
-        'name' => 'date', 
-        'value' => date('d.m.Y', strtotime($model->date)),
-        'options' => ['placeholder' => 'Укажите дату выхода книги'],
+        'options' => [
+            'placeholder' => 'Укажите дату выхода книги',
+            'value' => empty($model->date) ? '' : Yii::$app->formatter->asDate($model->date)
+        ],
         'pluginOptions' => [
             'format' => 'dd.mm.yyyy',
             'todayHighlight' => true,
